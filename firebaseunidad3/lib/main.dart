@@ -1,10 +1,17 @@
+// ignore_for_file: unnecessary_new
+
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebaseunidad3/Componentes/Coordenadas.dart';
+import 'package:firebaseunidad3/Componentes/Equipo.dart';
 import 'package:flutter/material.dart';
 
 import 'Componentes/Registro.dart';
 import 'Componentes/firebase.dart';
+import 'Componentes/Equipo.dart';
 
 int _paginaActual = 0;
+int activoMenu2 = 0;
+List menu_home = ["Capitanes", "Equipo", "Coordenadas", "Has", "Estadio"];
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,6 +30,9 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+enum SingingCharacter { lafayette, jefferson }
+SingingCharacter? _character = SingingCharacter.lafayette;
 
 class Inicio extends StatefulWidget {
   Inicio({Key? key}) : super(key: key);
@@ -53,7 +63,67 @@ class _InicioState extends State<Inicio> {
   }
 
   Widget Add() {
-    return Container(child: registro());
+    return SingleChildScrollView(
+        child: Column(
+      children: [
+        // ignore: prefer_const_constructors
+        SizedBox(
+          height: 10,
+        ),
+        // bloque 1
+        SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: List.generate(menu_home.length, (index) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: GestureDetector(
+                    onTap: () {},
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              activoMenu2 = index;
+                            });
+                          },
+                          child: Text(menu_home[index]),
+                          style: ElevatedButton.styleFrom(
+                              shadowColor: Colors.white,
+                              elevation: 0,
+                              shape: new RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(35.0),
+                              ),
+                              primary: activoMenu2 == index
+                                  ? Colors.blue
+                                  : Color.fromARGB(255, 236, 236, 236),
+                              onPrimary: activoMenu2 == index
+                                  ? Color.fromARGB(255, 236, 236, 236)
+                                  : Colors.blue),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }),
+            )),
+        //Bloque 2
+        // ignore: prefer_const_constructors
+        SizedBox(
+          height: 10,
+        ),
+        // bloque 3
+
+        activoMenu2 == 0
+            ? Capitan()
+            : activoMenu2 == 1
+                ? Equi()
+                : activoMenu2 == 2
+                    ? Coordenadas()
+                    : Text("data")
+      ],
+    ));
   }
 
   Widget Edit() {

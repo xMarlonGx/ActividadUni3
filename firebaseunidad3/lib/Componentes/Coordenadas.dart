@@ -1,43 +1,43 @@
 import 'package:flutter/material.dart';
 
-Widget Capitan() {
+Widget Coordenadas() {
   return SingleChildScrollView(
     scrollDirection: Axis.vertical,
     child: Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[Equipo(), Nombre(), botones()],
+        children: <Widget>[Longitud(), Latitud(), botones()],
       ),
     ),
   );
 }
 
-Widget Equipo() {
+Widget Longitud() {
   return Container(
     padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
     child: TextFormField(
       autocorrect: true,
       decoration: InputDecoration(
-        hintText: "Equipo",
+        hintText: "Longitud",
         fillColor: Colors.white,
         filled: true,
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
-        prefixIcon: const Icon(Icons.add_circle_outlined),
+        prefixIcon: const Icon(Icons.numbers),
       ),
     ),
   );
 }
 
-Widget Nombre() {
+Widget Latitud() {
   return Container(
     padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
     child: TextFormField(
       decoration: InputDecoration(
-        hintText: "Nombre",
+        hintText: "Latitud",
         fillColor: Colors.white,
         filled: true,
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
-        prefixIcon: const Icon(Icons.auto_stories_outlined),
+        prefixIcon: const Icon(Icons.numbers),
       ),
     ),
   );
