@@ -12,6 +12,8 @@ void getCapitanes() async {
 
   QuerySnapshot query = await collectionReference.get();
 
+  Capitanes.clear();
+
   if (query.docs.length != 0) {
     for (var docs in query.docs) {
       Capitanes.add(docs.data());

@@ -3,6 +3,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebaseunidad3/Componentes/Coordenadas.dart';
 import 'package:firebaseunidad3/Componentes/Equipo.dart';
+import 'package:firebaseunidad3/Componentes/Estadios.dart';
 import 'package:flutter/material.dart';
 
 import 'Componentes/Registro.dart';
@@ -11,7 +12,7 @@ import 'Componentes/Equipo.dart';
 
 int _paginaActual = 0;
 int activoMenu2 = 0;
-List menu_home = ["Capitanes", "Equipo", "Coordenadas", "Has", "Estadio"];
+List menu_home = ["Capitanes", "Equipo", "Coordenadas", "Estadio"];
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -121,17 +122,9 @@ class _InicioState extends State<Inicio> {
                 ? Equi()
                 : activoMenu2 == 2
                     ? Coordenadas()
-                    : Text("data")
+                    : Estadios()
       ],
     ));
-  }
-
-  Widget Edit() {
-    return Container(child: Text("asdas"));
-  }
-
-  Widget Delete() {
-    return Container(child: Text("asdas"));
   }
 
   Widget getPaginas() {
@@ -140,8 +133,6 @@ class _InicioState extends State<Inicio> {
       // ignore: prefer_const_literals_to_create_immutables
       children: [
         Add(),
-        Edit(),
-        Delete(),
         Listado(),
       ],
     );
@@ -150,8 +141,6 @@ class _InicioState extends State<Inicio> {
   Widget botonesFooter() {
     List items = [
       Icons.add_circle,
-      Icons.edit,
-      Icons.delete,
       Icons.list,
     ];
     return Container(
@@ -168,6 +157,7 @@ class _InicioState extends State<Inicio> {
                 onPressed: () {
                   setState(() {
                     _paginaActual = index;
+                    getCapitanes();
                   });
                 },
                 icon: Icon(
@@ -186,26 +176,8 @@ class _InicioState extends State<Inicio> {
       children: List.generate(Capitanes.length, (index) {
         return Column(
           children: [
-            Container(
-                child: Text("Capitan: " +
-                    Capitanes[index]['Nombre'] +
-                    " Equipo: " +
-                    Equipos[index]['Nombre'])),
-            Container(
-                child: Text("Entrenador: " +
-                    Equipos[index]['Entrenador'] +
-                    " Web: " +
-                    Equipos[index]['web'])),
-            Container(
-                child: Text("Estadio: " +
-                    Estadio[index]['Nombre'] +
-                    " Capacidad: " +
-                    Estadio[index]['Capacidad'].toString())),
-            Container(
-                child: Text("Coordenadas: Latitud: " +
-                    Coordenada[index]['latitud'].toString() +
-                    " Longitud: " +
-                    Coordenada[index]['Longitud'].toString())),
+            Text("Capitan: " + Capitanes[index]['Nombre'],
+                style: TextStyle(fontSize: 24)),
           ],
         );
       }),
